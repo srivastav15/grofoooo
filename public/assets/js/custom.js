@@ -64,33 +64,33 @@ jQuery(function ($) {
     pagination: false
   });
 
-  $("#owl_product").owlCarousel({
+  // $("#owl_product").owlCarousel({
 
-    autoPlay: 30000, //Set AutoPlay to 3 seconds
+  //   autoPlay: 30000, //Set AutoPlay to 3 seconds
 
-    items: 5,
-    itemsDesktop: [1199, 3],
-    itemsDesktopSmall: [979, 3],
-    navigation: true,
-    navigationText: ["<i class='ion-ios-arrow-back icon_arrow'></i>", "<i class='ion-ios-arrow-forward icon_arrow'></i>"],
-    rewindNav: true,
-    pagination: false,
-    scrollPerPage: false
-  });
+  //   items: 5,
+  //   itemsDesktop: [1199, 3],
+  //   itemsDesktopSmall: [979, 3],
+  //   navigation: true,
+  //   navigationText: ["<i class='ion-ios-arrow-back icon_arrow'></i>", "<i class='ion-ios-arrow-forward icon_arrow'></i>"],
+  //   rewindNav: true,
+  //   pagination: false,
+  //   scrollPerPage: false
+  // });
 
-  $("#owl_trending_items").owlCarousel({
+  // $("#owl_trending_items").owlCarousel({
 
-    autoPlay: 30000, //Set AutoPlay to 3 seconds
+  //   autoPlay: 30000, //Set AutoPlay to 3 seconds
 
-    items: 5,
-    itemsDesktop: [1199, 3],
-    itemsDesktopSmall: [979, 3],
-    navigation: true,
-    navigationText: ["<i class='ion-ios-arrow-back icon_arrow'></i>", "<i class='ion-ios-arrow-forward icon_arrow'></i>"],
-    rewindNav: true,
-    pagination: false,
-    scrollPerPage: false
-  });
+  //   items: 5,
+  //   itemsDesktop: [1199, 3],
+  //   itemsDesktopSmall: [979, 3],
+  //   navigation: true,
+  //   navigationText: ["<i class='ion-ios-arrow-back icon_arrow'></i>", "<i class='ion-ios-arrow-forward icon_arrow'></i>"],
+  //   rewindNav: true,
+  //   pagination: false,
+  //   scrollPerPage: false
+  // });
 
   $("#owl_product_suggested").owlCarousel({
 
@@ -163,19 +163,19 @@ jQuery(function ($) {
   });
 
 
-  $("#owl_brand").owlCarousel({
+  // $("#owl_brand").owlCarousel({
 
-    autoPlay: 30000, //Set AutoPlay to 3 seconds
+  //   autoPlay: 30000, //Set AutoPlay to 3 seconds
 
-    items: 8,
-    itemsDesktop: [1199, 3],
-    itemsDesktopSmall: [979, 3],
-    navigation: true,
-    navigationText: ["<i class='ion-ios-arrow-back icon_arrow'></i>", "<i class='ion-ios-arrow-forward icon_arrow'></i>"],
-    rewindNav: true,
-    pagination: false,
-    scrollPerPage: false
-  });
+  //   items: 8,
+  //   itemsDesktop: [1199, 3],
+  //   itemsDesktopSmall: [979, 3],
+  //   navigation: true,
+  //   navigationText: ["<i class='ion-ios-arrow-back icon_arrow'></i>", "<i class='ion-ios-arrow-forward icon_arrow'></i>"],
+  //   rewindNav: true,
+  //   pagination: false,
+  //   scrollPerPage: false
+  // });
 
   // $(document).ready(function () {
 

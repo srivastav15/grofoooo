@@ -1,37 +1,25 @@
 import TrendingFood from "./TrendingFood";
 import { getTrendingFood } from "../services/ProductService";
 import { useState, useEffect } from "react";
-import $ from "jquery";
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
+import { dummyDataGrocery } from "../dummyData/dummyDataGrocery";
+import { dummyCategories } from "../dummyData/dummyCategories";
 
 const Home = () => {
-  const [trendingFood, setTrendingFood] = useState([]);
+  const [trendingProducts, setTrendingProducts] = useState([]);
+  const groceryData = dummyDataGrocery();
+  const categoriesData = dummyCategories();
 
-  const fetchTrendingFood = async () => {
+  const fetchTrendingProducts = async () => {
     const trending = await getTrendingFood();
-    setTrendingFood(trending);
+    setTrendingProducts(trending);
   };
 
   useEffect(() => {
-    fetchTrendingFood();
-    // if ($.isFunction("owlCarousel")) {
-    //   $("#owl_product").owlCarousel({
-    //     autoPlay: 30000, //Set AutoPlay to 3 seconds
-
-    //     items: 5,
-    //     itemsDesktop: [1199, 3],
-    //     itemsDesktopSmall: [979, 3],
-    //     navigation: true,
-    //     navigationText: [
-    //       "<i class='ion-ios-arrow-back icon_arrow'></i>",
-    //       "<i class='ion-ios-arrow-forward icon_arrow'></i>",
-    //     ],
-    //     rewindNav: true,
-    //     pagination: false,
-    //     scrollPerPage: false,
-    //   });
-    // }
+    fetchTrendingProducts();
   }, []);
-  // console.log("trend", trendingFood);
 
   return (
     <div id="main" className="main">
@@ -84,177 +72,44 @@ const Home = () => {
             </div>
 
             <div id="owl_brand" className="categories_box">
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/Beverages.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">Beverages</a>
-                      </div>
-                    </a>
+              {categoriesData.length ? (
+                <div id="owl_product">
+                  <div className="item">
+                    <OwlCarousel
+                      className="owl-theme"
+                      loop
+                      items={8}
+                      margin={2}
+                      nav
+                    >
+                      {categoriesData.map((catUrl, index) => {
+                        return (
+                          <div key={index} className="item">
+                            <div className="col-xs-12 col-sm-12 col-md-12 food-item">
+                              <div className="food-item-wrap">
+                                <a href="search_list_new.html">
+                                  <div
+                                    className="figure-wrap-brand bg-image"
+                                    style={{
+                                      background: `url(${catUrl.url}) center center/cover no-repeat`,
+                                      "background-size": "contain",
+                                    }}
+                                  ></div>
+                                  <div className="content">
+                                    <a href="search_list_new.html">Beverages</a>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </OwlCarousel>
                   </div>
                 </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/Canned_and_Packaged.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">Canned & Packaged</a>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/Condiments.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">Condiments</a>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/Festival.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">Festival</a>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/Freezer_Foods.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">Freezer & Foods</a>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/Groceries.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">Groceries</a>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/Health_Beauty.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">Health & Beauty</a>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/Instant_Food.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">Instant Food</a>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <a href="search_list_new.html">
-                      <div
-                        className="figure-wrap-brand bg-image"
-                        style={{
-                          background:
-                            "url('assets/images/kitchen.png') center center/cover no-repeat",
-                          "background-size": "contain",
-                        }}
-                      ></div>
-                      <div className="content">
-                        <a href="search_list_new.html">kitchen</a>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              ) : (
+                ""
+              )}
             </div>
 
             <div className="home-header-text">
@@ -263,318 +118,112 @@ const Home = () => {
               </h1>
             </div>
             <div id="owl_trending_items">
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <div
-                      className="figure-wrap bg-image"
-                      style={{
-                        background:
-                          "url('assets/images/23664a.jpg') center center/cover no-repeat",
-                        "background-size": "200px",
-                      }}
+              {groceryData.length ? (
+                <div id="owl_product">
+                  <div className="item">
+                    <OwlCarousel
+                      className="owl-theme"
+                      loop
+                      items={5}
+                      margin={2}
+                      nav
                     >
-                      <div className="treding">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-android-share-alt group_icon"></i>
-                          12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-eye group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-bag group_icon"></i>12K
-                        </a>
-                      </div>
-                      <div className="review pull-right">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-star-outline group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-chatbubble-outline group_icon"></i>
-                          12K
-                        </a>
-                      </div>
-                    </div>
-                    <div className="content">
-                      <h5>
-                        <a href="product_page.html">
-                          Aashirvaad Shudh Chakki Whole Wheat Atta
-                        </a>
-                      </h5>
-                      <div className="product-name">12 KG </div>
-                      <div className="price-btn-block">
-                        <span className="price_cut">Rs 15,99</span>
-                        <span className="price">Rs 15,99</span>
-                        <a href="#" className="theme-btn-dash pull-right">
-                          <i className="ion-ios-cart-outline"></i> Add to cart
-                        </a>
-                      </div>
-                    </div>
+                      {groceryData.map((groceryUrl, index) => {
+                        console.log("gro", groceryUrl);
+                        return (
+                          <div key={index} className="item">
+                            <div className="col-xs-12 col-sm-12 col-md-12 food-item">
+                              <div className="food-item-wrap">
+                                <div
+                                  className="figure-wrap bg-image"
+                                  style={{
+                                    background: `url(${groceryUrl.url}) center center/cover no-repeat`,
+                                    "background-size": "200px",
+                                  }}
+                                >
+                                  <div className="treding">
+                                    <a href="#" className="treding-icon">
+                                      <i className="ion-android-share-alt group_icon"></i>
+                                      12K
+                                    </a>
+                                    <a href="#" className="treding-icon">
+                                      <i className="ion-eye group_icon"></i>12K
+                                    </a>
+                                    <a href="#" className="treding-icon">
+                                      <i className="ion-bag group_icon"></i>12K
+                                    </a>
+                                  </div>
+                                  <div className="review pull-right">
+                                    <a href="#" className="treding-icon">
+                                      <i className="ion-ios-star-outline group_icon"></i>
+                                      12K
+                                    </a>
+                                    <a href="#" className="treding-icon">
+                                      <i className="ion-ios-chatbubble-outline group_icon"></i>
+                                      12K
+                                    </a>
+                                  </div>
+                                </div>
+                                <div className="content">
+                                  <h5>
+                                    <a href="product_page.html">
+                                      Aashirvaad Shudh Chakki Whole Wheat Atta
+                                    </a>
+                                  </h5>
+                                  <div className="product-name">12 KG </div>
+                                  <div className="price-btn-block">
+                                    <span className="price_cut">Rs 15,99</span>
+                                    <span className="price">Rs 15,99</span>
+                                    <a
+                                      href="#"
+                                      className="theme-btn-dash pull-right"
+                                    >
+                                      <i className="ion-ios-cart-outline"></i>{" "}
+                                      Add to cart
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </OwlCarousel>
                   </div>
                 </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <div
-                      className="figure-wrap bg-image"
-                      style={{
-                        background:
-                          "url('assets/images/124472a.jpg') center center/cover no-repeat",
-                        "background-size": "200px",
-                      }}
-                    >
-                      <div className="treding">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-android-share-alt group_icon"></i>
-                          12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-eye group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-bag group_icon"></i>12K
-                        </a>
-                      </div>
-                      <div className="review pull-right">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-star-outline group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-chatbubble-outline group_icon"></i>
-                          12K
-                        </a>
-                      </div>
-                    </div>
-                    <div className="content">
-                      <h5>
-                        <a href="product_page.html">Grain And Oil Seed</a>
-                      </h5>
-                      <div className="product-name">12 KG </div>
-                      <div className="price-btn-block">
-                        <span className="price_cut">Rs 15,99</span>
-                        <span className="price">Rs 15,99</span>
-                        <a href="#" className="theme-btn-dash pull-right">
-                          <i className="ion-ios-cart-outline"></i> Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <div
-                      className="figure-wrap bg-image"
-                      style={{
-                        background:
-                          "url('assets/images/pro_14626.jpg') center center/cover no-repeat",
-                        "background-size": "200px",
-                      }}
-                    >
-                      <div className="treding">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-android-share-alt group_icon"></i>
-                          12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-eye group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-bag group_icon"></i>12K
-                        </a>
-                      </div>
-                      <div className="review pull-right">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-star-outline group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-chatbubble-outline group_icon"></i>
-                          12K
-                        </a>
-                      </div>
-                    </div>
-                    <div className="content">
-                      <h5>
-                        <a href="product_page.html">Organic Produce</a>
-                      </h5>
-                      <div className="product-name">12 KG </div>
-                      <div className="price-btn-block">
-                        <span className="price_cut">Rs 15,99</span>
-                        <span className="price">Rs 15,99</span>
-                        <a href="#" className="theme-btn-dash pull-right">
-                          <i className="ion-ios-cart-outline"></i> Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <div
-                      className="figure-wrap bg-image"
-                      style={{
-                        background:
-                          "url('assets/images/pro_20189.jpg') center center/cover no-repeat",
-                        "background-size": "200px",
-                      }}
-                    >
-                      <div className="treding">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-android-share-alt group_icon"></i>
-                          12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-eye group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-bag group_icon"></i>12K
-                        </a>
-                      </div>
-                      <div className="review pull-right">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-star-outline group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-chatbubble-outline group_icon"></i>
-                          12K
-                        </a>
-                      </div>
-                    </div>
-                    <div className="content">
-                      <h5>
-                        <a href="product_page.html">Vegetables</a>
-                      </h5>
-                      <div className="product-name">12 KG </div>
-                      <div className="price-btn-block">
-                        <span className="price_cut">Rs 15,99</span>
-                        <span className="price">Rs 15,99</span>
-                        <a href="#" className="theme-btn-dash pull-right">
-                          <i className="ion-ios-cart-outline"></i> Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <div
-                      className="figure-wrap bg-image"
-                      style={{
-                        background:
-                          "url('assets/images/pro_55389.jpg') center center/cover no-repeat",
-                        "background-size": "200px",
-                      }}
-                    >
-                      <div className="treding">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-android-share-alt group_icon"></i>
-                          12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-eye group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-bag group_icon"></i>12K
-                        </a>
-                      </div>
-                      <div className="review pull-right">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-star-outline group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-chatbubble-outline group_icon"></i>
-                          12K
-                        </a>
-                      </div>
-                    </div>
-                    <div className="content">
-                      <h5>
-                        <a href="product_page.html">Grain And Oil Seed</a>
-                      </h5>
-                      <div className="product-name">12 KG </div>
-                      <div className="price-btn-block">
-                        <span className="price_cut">Rs 15,99</span>
-                        <span className="price">Rs 15,99</span>
-                        <a href="#" className="theme-btn-dash pull-right">
-                          <i className="ion-ios-cart-outline"></i> Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                  <div className="food-item-wrap">
-                    <div
-                      className="figure-wrap bg-image"
-                      style={{
-                        background:
-                          "url('assets/images/pro_68615.jpg') center center/cover no-repeat",
-                        "background-size": "200px",
-                      }}
-                    >
-                      <div className="treding">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-android-share-alt group_icon"></i>
-                          12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-eye group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-bag group_icon"></i>12K
-                        </a>
-                      </div>
-                      <div className="review pull-right">
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-star-outline group_icon"></i>12K
-                        </a>
-                        <a href="#" className="treding-icon">
-                          <i className="ion-ios-chatbubble-outline group_icon"></i>
-                          12K
-                        </a>
-                      </div>
-                    </div>
-                    <div className="content">
-                      <h5>
-                        <a href="product_page.html">Organic Produce</a>
-                      </h5>
-                      <div className="product-name">12 KG </div>
-                      <div className="price-btn-block">
-                        <span className="price_cut">Rs 15,99</span>
-                        <span className="price">Rs 15,99</span>
-                        <a href="#" className="theme-btn-dash pull-right">
-                          <i className="ion-ios-cart-outline"></i> Add to cart
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ) : (
+                ""
+              )}
             </div>
             <div className="home-header-text">
               <h1 className="wow fadeInDown title-top-space">Trending Foods</h1>
             </div>
-            <div id="owl_product">
-              <div className="item">
-                {trendingFood.map((foodUrl) => {
-                  return (
-                    <div className="col-xs-12 col-sm-12 col-md-12 food-item">
-                      <TrendingFood url={foodUrl} />
-                    </div>
-                  );
-                })}
+            {trendingProducts.length ? (
+              <div id="owl_product">
+                <div className="item">
+                  <OwlCarousel
+                    className="owl-theme"
+                    loop
+                    items={5}
+                    margin={2}
+                    nav
+                  >
+                    {trendingProducts.map((foodUrl, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="col-xs-12 col-md-12 col-sm-12 food-item"
+                        >
+                          <TrendingFood url={foodUrl} />
+                        </div>
+                      );
+                    })}
+                  </OwlCarousel>
+                </div>
               </div>
-            </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
